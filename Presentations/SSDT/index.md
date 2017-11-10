@@ -91,5 +91,3 @@ Finally, SSDT also includes several built-in code analysis rules for sql, which 
 # Data Comparison
 
 # Static Data
-
-# Tsql Code Analysis
