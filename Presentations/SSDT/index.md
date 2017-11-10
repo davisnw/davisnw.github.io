@@ -81,8 +81,6 @@ Also of note:
 
 # Refactor Log
 
-# Project properties
-
 # SSDT Variables and Sql Command
 
 # Database References
