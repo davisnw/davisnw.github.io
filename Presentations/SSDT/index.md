@@ -57,6 +57,25 @@ Finally, SSDT also includes several built-in code analysis rules for sql, which 
 ![alt text](BuildDatabase6.png "Enable Code Analysis Rules")
 
 # Extended Properties (and data dictionary)
+SSDT provides limited built-in support for data dictionary entries on table columns.
+To enable ui editing, you must right click the column headers and select "Description", e.g.  
+![alt text](ExtendedProperties1.png "Enabling Description in SSDT tsql designer.")
+
+Then you can see and edit from either the extended property in the sql script or the "Description" field in the table designer:  
+![alt text](ExtendedProperties2.png "Editing Description in SSDT tsql designer.") 
+
+Note that even if you don't have "Description" enabled in the designer, you can still edit the extended property - they are one and the same.
+
+Also of note:
+ * The UI designer (as far as I can tell) will not accept newlines for editing in the designer.  However, 
+ if you put a newline in the extended property definition, the designer will show it.
+ * It appears that SSDT only provides the UI description for table columns.  However, you can still
+ add extended properties via script to any legal database object, and they will be stored and show up
+ in schema comparison.
+ * There are tools (such as from redgate) that will generate data dictionaries from the ms_description extended properties, including those on stored procedures that you would store in SSDT.
+ * You could fairly easily write a basic html/text/csv etc data dictionary by querying the extended properties yourself for which e.g. [sys.fn_listextendedproperty](https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-listextendedproperty-transact-sql) might be helpful
+ * While the SSDT designer only provides support for ms_description property, you can store any valid extended property in the .sql file for the object.
+
 
 # Schema Comparison and Syncing
 
