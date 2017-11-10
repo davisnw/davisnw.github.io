@@ -39,7 +39,7 @@ To import a database schema into a new project you can use the following steps:
  1. Note: While the project settings correspond to database settings, just like SQL Server objects can have different ansi settings then the db default, so this can also occur with the SSDT project, e.g. ![alt text](ImportDatabase5.png "Import Database 5")
 
 # Building database projects
-You build SSDT database projects, just like any other source code in visual studio (e.g. by buildling the project or the solution).
+You build SSDT database projects, just like any other source code in visual studio (e.g. by building the project or the solution).
 
 One of the advantages of SSDT is that if you, for example, reference an object that doesn't exist, the build will fail (in most cases), letting you know that something is wrong.
 For example, suppose I mistype a column in a stored procedure definition, I would see an error similar to ![alt text](BuildDatabase1.png "Build Database Error")
@@ -76,10 +76,37 @@ Also of note:
  * You could fairly easily write a basic html/text/csv etc data dictionary by querying the extended properties yourself for which e.g. [sys.fn_listextendedproperty](https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-listextendedproperty-transact-sql) might be helpful
  * While the SSDT designer only provides support for ms_description property, you can store any valid extended property in the .sql file for the object.
 
+# Refactor Log
+The refactor log is an xml file that stores certain actions for changing database objects. It helps SSDT generate more intelligent scripts when preparing a deployment, because for example, it will then know that you renamed a column rather than dropping and old one and adding a new one.
+
+To ensure that something ends up in the refactor log, you must use the SSDT operation to perform the edit.
+For example, instead of just manually retyping a column name, do:  
+![alt text](RefactorLog1.png "Rename refactor")
+
+This will result in a refactorlog file being created or edited:  
+![alt text](RefactorLog2.png "RefactorLog file in detected source changes")
+
+Example contents of the refactorlog:
+{% highlight xml %}
+<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="190b74d3-41dc-4ca1-9102-ffa4b6361006" ChangeDateTime="11/10/2017 12:56:13">
+    <Property Name="ElementName" Value="[Lorem].[Ipsum].[FindANest]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Lorem].[Ipsum]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FindAnEgg]" />
+  </Operation>
+</Operations>
+{% endhighlight %}
+
+When you publish or generate scripts using SSDT, it keeps track of which refactorings have been applied
+to that particular environment by keeping the operation key in the __RefactorLog table:  
+![alt text](RefactorLog3.png "RefactorLog table")
+
+Once you are sure a refactoring has been deployed to all environments that you care about, you can manually edit the xml file to remove old refactoring actions - though this is not necessary, it may help you review changes to keep it relatively small.
 
 # Schema Comparison and Syncing
-
-# Refactor Log
 
 # SSDT Variables and Sql Command
 
