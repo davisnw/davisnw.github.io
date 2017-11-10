@@ -25,6 +25,14 @@ However, in my experience the most reliable means to get SSDT is to use the Visu
   ![alt text](SSDTWorkloadInstall.png "SSDT Workload Install")
 
 # Importing a database with SSDT
+If you already have a database that you now want to bring into SSDT, you can easily import its schema into a database project.  This provides several advantages including easy integration with source control and database object validity checks - we will explore these in more detail later.
+
+To import a database schema into a new project you can use the following steps:
+ 1. Create a new database project ![alt text](NewSSDTProject.png "New SSDT Project")
+ 1. Right-click the database project, choose "Import" and "Database" ![alt text](ImportDatabase1.png "Import Database 1")
+ 1. Fill out the database connection, choose the import options, and click start ![alt text](ImportDatabase2.png "Import Database 2")
+	* Note: There are several different options for the default structure of the files in the imported project.  I generally prefer "Schema\Object", but afterwards manually move the schema create script under each schema folder.  SSDT actually doesn't care how the files are structured - it only requires that the create scripts be valid.
+ 1. You now have a database project that you can commit to source control, just like any other source code.  With the import options shown in the previous screen shot, Schemas will be under the "Security" folder, and each object will be in a folder corresponding to the schema name with sub-folders per "major" db object type. Again, you can re-arrange folder structures however you wish. ![alt text](ImportDatabase3.png "Import Database 3")
 
 # Building database projects
 

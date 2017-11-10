@@ -7,4 +7,4 @@ layout: home
 # Presentations
 * [didactic-defense](http://davisnw.github.io/didactic-defense/) (Web Application Security)
 * [mvvm-palindrome](http://davisnw.github.io/mvvm-palindrome/) (Model - View - View Model pattern)
-* [SSDT](/Presentations/SSDT/)
+* [SSDT](/Presentations/SSDT/) (Sql Server Data Tools)
