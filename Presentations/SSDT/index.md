@@ -32,7 +32,11 @@ To import a database schema into a new project you can use the following steps:
  1. Right-click the database project, choose "Import" and "Database" ![alt text](ImportDatabase1.png "Import Database 1")
  1. Fill out the database connection, choose the import options, and click start ![alt text](ImportDatabase2.png "Import Database 2")
 	* Note: There are several different options for the default structure of the files in the imported project.  I generally prefer "Schema\Object", but afterwards manually move the schema create script under each schema folder.  SSDT actually doesn't care how the files are structured - it only requires that the create scripts be valid.
- 1. You now have a database project that you can commit to source control, just like any other source code.  With the import options shown in the previous screen shot, Schemas will be under the "Security" folder, and each object will be in a folder corresponding to the schema name with sub-folders per "major" db object type. Again, you can re-arrange folder structures however you wish. ![alt text](ImportDatabase3.png "Import Database 3")
+ 1. You now have a database project that you can commit to source control, just like any other source code.  With the import options shown in the previous screen shot, Schemas will be under the "Security" folder, and each object will be in a folder corresponding to the schema name with sub-folders per "major" db object type. Again, you can re-arrange folder structures however you wish.
+ ![alt text](ImportDatabase3.png "Import Database 3")
+ 1. Note: while selecting "Import Database Settings" should set default options to match the setting from your imported database, it is a good idea to verify the project database settings, especially collation and ansi settings. Generally speaking it's probably a good idea to uncheck ["auto-close"](https://www.brentozar.com/blitz/auto-close-enabled/) on the "Operational tab". To do so, right click the project in solution explorer, click "properties" and open the database settings. Make desired changes, save all on the solution and commit your changes to source control. The settings are stored in the .sqlproj file.
+ ![alt text](ImportDatabase4.png "Import Database 4")
+ 1. Note: While the project settings correspond to database settings, just like SQL Server objects can have different ansi settings then the db default, so this can also occur with the SSDT project, e.g. ![alt text](ImportDatabase5.png "Import Database 5")
 
 # Building database projects
 
