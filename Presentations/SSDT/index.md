@@ -39,6 +39,22 @@ To import a database schema into a new project you can use the following steps:
  1. Note: While the project settings correspond to database settings, just like SQL Server objects can have different ansi settings then the db default, so this can also occur with the SSDT project, e.g. ![alt text](ImportDatabase5.png "Import Database 5")
 
 # Building database projects
+You build SSDT database projects, just like any other source code in visual studio (e.g. by buildling the project or the solution).
+
+One of the advantages of SSDT is that if you, for example, reference an object that doesn't exist, the build will fail (in most cases), letting you know that something is wrong.
+For example, suppose I mistype a column in a stored procedure definition, I would see an error similar to ![alt text](BuildDatabase1.png "Build Database Error")
+
+If I for example, type a column such that it differs only by case, I will get a warning similar to ![alt text](BuildDatabase2.png "Build Database Warning").
+
+Optionally, I can treat all tsql warnings as errors: ![alt text](BuildDatabase3.png "Warnings as Errors")
+
+Or suppress warnings globally: ![alt text](BuildDatabase4.png "Warnings as Errors With Global Suppression")
+
+Or suppress warnings per file:  
+![alt text](BuildDatabase5.png "Suppress Warnings per file")
+
+Finally, SSDT also includes several built-in code analysis rules for sql, which you can enable:  
+![alt text](BuildDatabase6.png "Enable Code Analysis Rules")
 
 # Extended Properties (and data dictionary)
 
